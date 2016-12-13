@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "mocha": "^3.2.0",
+    "panic-server": "^1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.12.1"
+  },
+  "name": "panic-load-test",
+  "version": "1.0.0",
+  "description": "Test how many concurrent messages gunDB can handle",
+  "main": "test.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "author": "Jesse Gibson <Jesse_Gibson@me.com> (http://PsychoLlama.io/)",
+  "license": "MIT"
+}
