@@ -21,7 +21,7 @@ module.exports = {
   hostname: 'localhost',
 
   /** @type {Object[]} - What platforms to expect. */
-  platforms: Array(2).fill().map(function () {
+  platforms: Array(1).fill().map(function () {
     return {
 
       /** @type {String} - A key for gun to save data to. */
@@ -39,24 +39,28 @@ module.exports = {
   manager: Manager(),
 
   /** @type {Object[]} - The number of app servers. */
-  servers: [{
+  servers: Array(1).fill().map(function (val, index) {
+    const port = 3000 + index;
 
-    /** The type of client to spin up, passed to Manager#start. */
-    type: 'node',
+    return {
 
-    /** Used for addressing. */
-    hostname: 'localhost',
-    port: 3000,
+      /** The type of client to spin up, passed to Manager#start. */
+      type: 'node',
 
-    /** Where the gun server should save it's data. */
-    file: join(__dirname, '3000.json'),
+      /** Used for addressing. */
+      hostname: 'localhost',
+      port: port,
 
-    /** Server routes for static files. */
-    routes: {
-      '/gun.js': require.resolve('gun/gun.js'),
-      '/': require.resolve('./index.html'),
-    },
-  }],
+      /** Where the gun server should save it's data. */
+      file: join(__dirname, `${port}.json`),
+
+      /** Server routes for static files. */
+      routes: {
+        '/gun.js': require.resolve('gun/gun.js'),
+        '/': require.resolve('./index.html'),
+      },
+    };
+  }),
 
   /** @type {String} - The absolute path to your gun library. */
   gun: require.resolve('gun'),

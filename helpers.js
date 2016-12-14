@@ -152,7 +152,7 @@ module.exports = {
       // Create a list of all node values.
       .reduce(function (sum, arr) {
         return sum.concat(arr);
-      })
+      }, [])
 
       // Track how many times we've seen a value.
       .forEach(function (id) {

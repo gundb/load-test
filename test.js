@@ -15,6 +15,9 @@ const count = {
   messages: config.platforms.reduce(function (sum, platform) {
     return sum + platform.messages;
   }, 0),
+  interval: config.platforms.reduce(function (sum, platform) {
+    return sum + (platform.interval || 0);
+  }, 0) / config.platforms.length,
 };
 
 const desc = {
@@ -24,7 +27,7 @@ server${count.servers > 1 ? 's' : ''}`,
   test: `should be able to handle ${count.clients} \
 browser${count.clients > 1 ? 's' : ''} \
 sending ${count.messages} messages at a rate of 1 per \
-${config.interval || 0} ms`,
+${count.interval || 0} ms`,
 };
 
 describe(desc.scenario, function () {
@@ -90,7 +93,7 @@ describe(desc.scenario, function () {
 
   it(desc.test, function * () {
 
-    this.timeout((config.interval || 1) * config.messages + 3000);
+    this.timeout((count.interval || 1) * config.messages + 3000);
 
     yield browsers.run(function () {
       localStorage.clear();
