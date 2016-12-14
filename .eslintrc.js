@@ -14,3 +14,11 @@ eslint.extends = [
   'eslint:recommended',
   'llama',
 ];
+
+eslint.rules = {
+  'global-require': 'off',
+  'yield-star-spacing': ['error', {
+    before: true,
+    after: true,
+  }],
+};
